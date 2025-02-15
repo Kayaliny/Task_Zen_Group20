@@ -26,7 +26,7 @@ class HomeScreen extends StatelessWidget {
                   CircleAvatar(
                     radius: 30,
                     backgroundImage: AssetImage(
-                        "assets/images/profile.jpg"), // Replace with actual image
+                        "assets/images/profile.png"), // Replace with actual image
                   ),
                   const SizedBox(width: 15),
                   Column(
