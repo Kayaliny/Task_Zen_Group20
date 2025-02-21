@@ -3,7 +3,7 @@ import 'package:intl/intl.dart';
 import '/widgets/footer.dart';
 
 class TaskListScreen extends StatefulWidget {
-  const TaskListScreen({Key? key}) : super(key: key);
+  const TaskListScreen({super.key});
 
   @override
   _TaskListScreenState createState() => _TaskListScreenState();
@@ -218,12 +218,12 @@ class TaskStatusTab extends StatelessWidget {
   final Function(String) onTabSelected;
 
   const TaskStatusTab({
-    Key? key,
+    super.key,
     required this.allTasks,
     required this.ongoingTasks,
     required this.completedTasks,
     required this.onTabSelected,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

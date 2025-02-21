@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '/widgets/footer.dart'; // Make sure to import the Footer widget
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -21,17 +22,17 @@ class HomeScreen extends StatelessWidget {
               const SizedBox(height: 10),
 
               // Profile & Greeting
-              Row(
+              const Row(
                 children: [
                   CircleAvatar(
                     radius: 30,
                     backgroundImage: AssetImage(
                         "assets/images/profile.png"), // Replace with actual image
                   ),
-                  const SizedBox(width: 15),
+                  SizedBox(width: 15),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
+                    children: [
                       Text(
                         "Hi Aisha",
                         style: TextStyle(
@@ -58,9 +59,9 @@ class HomeScreen extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Column(
+                    const Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: const [
+                      children: [
                         Text("Task Progress",
                             style: TextStyle(
                                 fontSize: 16, fontWeight: FontWeight.bold)),
@@ -120,35 +121,10 @@ class HomeScreen extends StatelessWidget {
         ),
       ),
 
-      // Floating Action Button (For Adding Tasks)
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          // Navigate to Add Task Screen
-        },
-        backgroundColor: Colors.green,
-        child: const Icon(Icons.add, size: 30, color: Colors.white),
-      ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
 
-      // Bottom Navigation Bar
-      bottomNavigationBar: BottomAppBar(
-        shape: const CircularNotchedRectangle(),
-        notchMargin: 10,
-        child: Container(
-          height: 60, // Fixed height for the bottom navigation bar
-          padding: const EdgeInsets.symmetric(),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              _buildNavItem(Icons.home, "Home", true),
-              _buildNavItem(Icons.list, "Task List", false),
-              const SizedBox(width: 50), // Space for FAB
-              _buildNavItem(Icons.calendar_today, "Calendar", false),
-              _buildNavItem(Icons.person, "Profile", false),
-            ],
-          ),
-        ),
-      ),
+      // Use Footer widget here instead of BottomNavigationBar
+      bottomNavigationBar: const Footer(),
     );
   }
 
@@ -178,19 +154,6 @@ class HomeScreen extends StatelessWidget {
           ),
         ],
       ),
-    );
-  }
-
-  // Navigation Bar Item Widget
-  Widget _buildNavItem(IconData icon, String label, bool isSelected) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Icon(icon, color: isSelected ? Colors.green : Colors.grey),
-        Text(label,
-            style: TextStyle(
-                fontSize: 12, color: isSelected ? Colors.green : Colors.grey)),
-      ],
     );
   }
 }

@@ -6,10 +6,10 @@ class CalendarWidget extends StatefulWidget {
   final Function(DateTime, TimeOfDay) onDateTimeSelected;
 
   const CalendarWidget({
-    Key? key,
+    super.key,
     required this.selectedDate,
     required this.onDateTimeSelected,
-  }) : super(key: key);
+  });
 
   @override
   _CalendarWidgetState createState() => _CalendarWidgetState();
@@ -74,7 +74,7 @@ class _CalendarWidgetState extends State<CalendarWidget> {
             widget.onDateTimeSelected(_selectedDate, _selectedTime);
           },
           calendarFormat: CalendarFormat.month,
-          headerStyle: HeaderStyle(
+          headerStyle: const HeaderStyle(
             formatButtonVisible: false,
             titleCentered: true,
             titleTextStyle: TextStyle(
@@ -82,7 +82,7 @@ class _CalendarWidgetState extends State<CalendarWidget> {
               fontWeight: FontWeight.bold,
             ),
           ),
-          calendarStyle: CalendarStyle(
+          calendarStyle: const CalendarStyle(
             todayDecoration: BoxDecoration(
               color: Colors.blueAccent,
               shape: BoxShape.circle,
@@ -93,36 +93,37 @@ class _CalendarWidgetState extends State<CalendarWidget> {
             ),
           ),
         ),
-        SizedBox(height: 20),
+        const SizedBox(height: 20),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
+            const Text(
               "Time",
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
             GestureDetector(
               onTap: () => _selectTime(context),
               child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                 decoration: BoxDecoration(
                   border: Border.all(color: Colors.grey),
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Text(
                   _formatTime(_selectedTime),
-                  style: TextStyle(fontSize: 16),
+                  style: const TextStyle(fontSize: 16),
                 ),
               ),
             ),
-            SizedBox(width: 10),
+            const SizedBox(width: 10),
             ToggleButtons(
               isSelected: [isAm, !isAm],
               onPressed: (index) => _toggleAmPm(),
               borderRadius: BorderRadius.circular(8),
               selectedColor: Colors.white,
-              fillColor: Color(0xFF7676801F),
-              children: [
+              fillColor: const Color(0xff7676801f),
+              children: const [
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 12),
                   child: Text("AM"),

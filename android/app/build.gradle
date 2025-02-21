@@ -8,7 +8,7 @@ plugins {
 def localProperties = new Properties()
 def localPropertiesFile = rootProject.file("local.properties")
 if (localPropertiesFile.exists()) {
-    localPropertiesFile.withReader("UTF-8") { reader ->
+    localPropertiesFile.withReader("UTF-8") { reader -> 
         localProperties.load(reader)
     }
 }
@@ -25,34 +25,37 @@ if (flutterVersionName == null) {
 
 android {
     namespace = "com.example.task_zen"
-    compileSdk = flutter.compileSdkVersion
-    ndkVersion = flutter.ndkVersion
 
+    // Default config for your app
+    defaultConfig {
+        compileSdkVersion 34 // Update to SDK version 34 or higher
+        targetSdkVersion 34  // Set target SDK version to 34 or higher
+        minSdkVersion 21     // Adjust to the minimum SDK version you need
+
+        applicationId = "com.example.task_zen"
+        versionCode = flutterVersionCode.toInteger()
+        versionName = flutterVersionName
+    }
+
+    // Java and Kotlin compatibility settings
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
 
-    defaultConfig {
-        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId = "com.example.task_zen"
-        // You can update the following values to match your application needs.
-        // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
-        minSdk = flutter.minSdkVersion
-        targetSdk = flutter.targetSdkVersion
-        versionCode = flutterVersionCode.toInteger()
-        versionName = flutterVersionName
+    kotlinOptions {
+        jvmTarget = "1.8"  // Ensure Kotlin is using Java 8 compatibility
     }
 
+    // Build types and configurations
     buildTypes {
         release {
-            // TODO: Add your own signing config for the release build.
-            // Signing with the debug keys for now, so `flutter run --release` works.
+            // Add signing configuration for your release build (if needed)
             signingConfig = signingConfigs.debug
         }
     }
 }
 
 flutter {
-    source = "../.."
+    source = "../.." // Point to your Flutter SDK source
 }

@@ -5,10 +5,10 @@ class ToggleButton extends StatelessWidget {
   final Function(int) onButtonPressed;
 
   const ToggleButton({
-    Key? key,
+    super.key,
     required this.selectedIndex,
     required this.onButtonPressed,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

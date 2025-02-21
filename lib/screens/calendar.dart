@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:googleapis_auth/auth_io.dart';
 import 'package:googleapis/calendar/v3.dart' as calendar;
@@ -13,7 +12,7 @@ class CalendarPage extends StatefulWidget {
 }
 
 class _CalendarPageState extends State<CalendarPage> {
-  PageController _pageController = PageController(initialPage: 1);
+  final PageController _pageController = PageController(initialPage: 1);
   DateTime _selectedDate = DateTime.now();
   int _currentDotIndex = 1;
   List<String> _holidays = []; // Store holidays

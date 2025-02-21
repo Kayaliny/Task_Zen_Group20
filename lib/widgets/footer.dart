@@ -5,10 +5,10 @@ class Footer extends StatelessWidget {
   final VoidCallback? onPressed;
 
   const Footer({
-    Key? key,
+    super.key,
     this.icon = Icons.close,
     this.onPressed,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -43,15 +43,15 @@ class Footer extends StatelessWidget {
             child: Container(
               width: 60,
               height: 60,
-              decoration: BoxDecoration(
-                color: const Color(0xFF90B9A4),
+              decoration: const BoxDecoration(
+                color: Color(0xFF90B9A4),
                 shape: BoxShape.circle,
                 boxShadow: [
                   BoxShadow(
                     color: Colors.black26,
                     blurRadius: 5,
                     spreadRadius: 2,
-                    offset: const Offset(0, 3),
+                    offset: Offset(0, 3),
                   ),
                 ],
               ),
