@@ -1,0 +1,2 @@
+C:/Users/Geenuka Sandil/AndroidStudioProjects/Task_Zen_Group20/android/app/.cxx/Debug/4c403h1j/armeabi-v7a/CMakeFiles/edit_cache.dir
+C:/Users/Geenuka Sandil/AndroidStudioProjects/Task_Zen_Group20/android/app/.cxx/Debug/4c403h1j/armeabi-v7a/CMakeFiles/rebuild_cache.dir
