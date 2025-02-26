@@ -3,12 +3,22 @@ plugins {
     id "kotlin-android"
     // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
     id "dev.flutter.flutter-gradle-plugin"
+    id("com.google.gms.google-services")
+}
+
+dependencies {
+    // Import the Firebase BoM
+    implementation(platform("com.google.firebase:firebase-bom:33.9.0"))
+
+    // TODO: Add the dependencies for Firebase products you want to use
+    // When using the BoM, don't specify versions in Firebase dependencies
+    implementation("com.google.firebase:firebase-analytics")
 }
 
 def localProperties = new Properties()
 def localPropertiesFile = rootProject.file("local.properties")
 if (localPropertiesFile.exists()) {
-    localPropertiesFile.withReader("UTF-8") { reader -> 
+    localPropertiesFile.withReader("UTF-8") { reader ->
         localProperties.load(reader)
     }
 }
@@ -30,7 +40,7 @@ android {
     defaultConfig {
         compileSdkVersion 34 // Update to SDK version 34 or higher
         targetSdkVersion 34  // Set target SDK version to 34 or higher
-        minSdkVersion 21     // Adjust to the minimum SDK version you need
+        minSdkVersion 23     // Adjust to the minimum SDK version you need
 
         applicationId = "com.example.task_zen"
         versionCode = flutterVersionCode.toInteger()

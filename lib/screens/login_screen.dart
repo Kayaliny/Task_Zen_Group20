@@ -1,5 +1,5 @@
+import 'package:firebase_auth/firebase_auth.dart'; // Import Firebase Auth
 import 'package:flutter/material.dart';
-
 import 'home_screen.dart'; // Import HomeScreen
 import 'signup_screen.dart'; // Import SignUpScreen
 
@@ -15,6 +15,40 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _passwordController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   bool passWordVisibility = true;
+
+  // Firebase Auth instance
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  Future<void> _login() async {
+    if (_formKey.currentState!.validate()) {
+      try {
+        // Authenticate the user using Firebase
+        UserCredential userCredential = await _auth.signInWithEmailAndPassword(
+          email: _usernameController.text,
+          password: _passwordController.text,
+        );
+
+        // If login is successful, navigate to the Home screen
+        if (userCredential.user != null) {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => const HomeScreen()),
+          );
+        }
+      } on FirebaseAuthException catch (e) {
+        // Show an error message if authentication fails
+        String errorMessage = "An error occurred. Please try again.";
+        if (e.code == 'user-not-found') {
+          errorMessage = 'No user found for that email.';
+        } else if (e.code == 'wrong-password') {
+          errorMessage = 'Wrong password provided.';
+        }
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(errorMessage)),
+        );
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,8 +73,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Image.asset('assets/images/logo.png',
-                      height: 120), // App Logo
+                  Image.asset('assets/images/logo.png', height: 120),
                   const SizedBox(height: 20),
                   const Text(
                     "Login to Your Account",
@@ -51,37 +84,28 @@ class _LoginScreenState extends State<LoginScreen> {
                   // Username input field
                   _buildTextField(
                       "Username", _usernameController, false, Icons.person,
-                      (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter your username';
-                    }
-                    return null;
-                  }),
+                          (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter your username';
+                        }
+                        return null;
+                      }),
                   const SizedBox(height: 15),
 
                   // Password input field with visibility toggle
                   _buildTextField(
                       "Password", _passwordController, true, Icons.lock,
-                      (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter your password';
-                    }
-                    return null;
-                  }),
+                          (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter your password';
+                        }
+                        return null;
+                      }),
                   const SizedBox(height: 25),
 
                   // Login Button
                   ElevatedButton(
-                    onPressed: () {
-                      if (_formKey.currentState!.validate()) {
-                        // If validation passes, navigate to Home screen
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const HomeScreen()),
-                        );
-                      }
-                    },
+                    onPressed: _login, // Call the login function here
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.green[300],
                       shape: RoundedRectangleBorder(
@@ -139,19 +163,19 @@ class _LoginScreenState extends State<LoginScreen> {
         filled: true,
         fillColor: Colors.grey[200],
         contentPadding:
-            const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+        const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
         suffixIcon: isPassword
             ? IconButton(
-                icon: Icon(
-                  passWordVisibility ? Icons.visibility_off : Icons.visibility,
-                  color: Colors.grey[700],
-                ),
-                onPressed: () {
-                  setState(() {
-                    passWordVisibility = !passWordVisibility;
-                  });
-                },
-              )
+          icon: Icon(
+            passWordVisibility ? Icons.visibility_off : Icons.visibility,
+            color: Colors.grey[700],
+          ),
+          onPressed: () {
+            setState(() {
+              passWordVisibility = !passWordVisibility;
+            });
+          },
+        )
             : null,
       ),
       validator: validator,

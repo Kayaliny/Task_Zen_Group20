@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "501779500635",
+    "project_id": "task-zen-b18ef",
+    "storage_bucket": "task-zen-b18ef.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:501779500635:android:6df73df57280769ab4b97e",
+        "android_client_info": {
+          "package_name": "com.example.task_zen"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBh3eqKP6R5CK5xod1MJ3rB66ATZ-U6Ltk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
